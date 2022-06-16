@@ -15,6 +15,10 @@ class AThreadControl: public QObject
 public:
     explicit AThreadControl (QLineEdit* lineEdit,QObject* parent=nullptr,void (*InWork)(ThreadProcess* threadProcess)=nullptr);
     explicit AThreadControl (QLineEdit* lineEdit,QObject* parent=nullptr,void (QObject::*ObjInWork)(ThreadProcess* threadProcess)=nullptr);
+    AThreadControl (AThreadControl&)=delete;
+    AThreadControl (AThreadControl&&)=delete;
+    void operator= (AThreadControl&)=delete;
+    void operator= (AThreadControl&&)=delete;
     ~AThreadControl ();
     void InitThread(void (AThreadControl::*Init)());
 public slots:
@@ -40,6 +44,10 @@ class ThreadProcess: public QObject
 public:
     explicit ThreadProcess (void (*InWork)(ThreadProcess* threadProcess), QObject* parent);
     explicit ThreadProcess (void (QObject::*ObjInWork)(ThreadProcess* threadProcess), QObject* parent);
+    ThreadProcess(ThreadProcess&)=delete;
+    ThreadProcess(ThreadProcess&&)=delete;
+    void operator=(ThreadProcess&)=delete;
+    void operator=(ThreadProcess&&)=delete;
     ~ThreadProcess ();
     void CurrentProgress(unsigned long long value, unsigned long long max);
 public slots:
